@@ -1,0 +1,120 @@
+# 文件和IO
+
+1. 读写文本数据：读取中可能针对不同的文本编码进行
+
+   ```
+   In[327]: def read():
+
+      .....:    with open('Journal.txt','rt') as f:
+
+      .....:        for i in f:
+
+      .....:            yield i
+
+      .....:
+
+   ```
+
+    
+
+2. 文件名和目录的处理
+
+   ```
+   In [1]:import os
+
+   In [2]:path = 'User/local/ssdb/data.csv'
+
+   #最后一部分名称
+
+   In [3]:os.path.basename(path)
+
+   Out[3]:'data.csv'
+
+   #此文件的文件夹名称
+
+   In [5]:os.path.dirname(path)
+
+   Out[5]:'User/local/ssdb'
+
+   #将路径结合起来
+
+   In [7]:os.path.join('tmp','data',os.path.basename(path))
+
+   Out[7]:'tmp/data/data.csv'
+
+   #扩展用户home文件夹
+
+   In [9]:path = '~/jj'
+
+   In [11]:os.path.expanduser(path)
+
+   Out[11]:'/home/fwq/jj'
+
+   #分离文件目录和文件属性
+
+   In [13]:path = 'User/local/ssdb/data.csv'
+
+   In [14]:os.path.splitext(path)
+
+   Out[14]:('User/local/ssdb/data', '.csv')
+
+   #检测文件或目录是否存在
+
+   In [19]:os.path.exists('BaseSSDB.py')
+
+   Out[19]:True
+
+   In [20]:os.path.exists('/etc/')
+
+   Out[20]:True
+
+   #文件性质的进一步检测，若文件不存在，则下面的值都为False
+
+   In [23]:os.path.isfile('BaseSSDB.py')
+
+   Out[23]:True
+
+   In [24]:os.path.isdir('BaseSSDB.py')
+
+   Out[24]:False
+
+   In [25]:os.path.islink('BaseSSDB.py')
+
+   Out[25]:False
+
+   In [26]:os.path.realpath('BaseSSDB.py')
+
+   Out[26]:'/home/fwq/jj/test/BaseSSDB.py'
+
+   #获取目录下的内容列表
+
+   In [31]:names = os.listdir('django')
+
+   In [32]:files = [name for name in names 
+
+   				ifos.path.isfile(os.path.join('django',name))]
+
+   In [33]:directions = [name for name in names 
+
+   				ifos.path.isdir(os.path.join('django',name))]
+
+   ```
+
+   ​
+
+3. 序列化python对象
+
+   ```
+   In [43]:a = (1,2,3,4)
+
+   In [44]:pickle.dumps(a)
+
+   Out[44]:'(I1\nI2\nI3\nI4\ntp0\n.'
+
+   In [45]:b = pickle.dumps(a)
+
+   In [47]:c = pickle.loads(b)
+
+   ```
+
+   ​
